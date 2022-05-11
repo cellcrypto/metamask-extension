@@ -390,6 +390,9 @@
   "blockies": {
     "message": "ब्लॉकीज़"
   },
+  "netDecimals": {
+    "message": "Decimals"
+  },
   "browserNotSupported": {
     "message": "आपका ब्राउज़र समर्थित नहीं है..."
   },

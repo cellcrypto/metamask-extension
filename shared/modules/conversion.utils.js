@@ -27,9 +27,17 @@ import BigNumber from 'bignumber.js';
 import { stripHexPrefix, BN } from 'ethereumjs-util';
 
 // Big Number Constants
-const BIG_NUMBER_WEI_MULTIPLIER = new BigNumber('1000000000000000000');
-const BIG_NUMBER_GWEI_MULTIPLIER = new BigNumber('1000000000');
-const BIG_NUMBER_ETH_MULTIPLIER = new BigNumber('1');
+const BIG_NUMBER_WEI_MULTIPLIER       = new BigNumber('1');
+const BIG_NUMBER_KWEI_MULTIPLIER      = new BigNumber('1000');
+const BIG_NUMBER_MWEI_MULTIPLIER      = new BigNumber('1000000');
+const BIG_NUMBER_GWEI_MULTIPLIER      = new BigNumber('1000000000');
+const BIG_NUMBER_MICRO_MULTIPLIER     = new BigNumber('1000000000000');
+const BIG_NUMBER_MILLI_MULTIPLIER     = new BigNumber('1000000000000000');
+const BIG_NUMBER_ETH_MULTIPLIER       = new BigNumber('1000000000000000000');
+const BIG_NUMBER_KILO_MULTIPLIER      = new BigNumber('1000000000000000000000');
+const BIG_NUMBER_MEGA_MULTIPLIER      = new BigNumber('1000000000000000000000000');
+const BIG_NUMBER_GIGA_MULTIPLIER      = new BigNumber('1000000000000000000000000000');
+const BIG_NUMBER_TERA_MULTIPLIER      = new BigNumber('1000000000000000000000000000000');
 
 // Setter Maps
 const toBigNumber = {
@@ -38,20 +46,144 @@ const toBigNumber = {
   BN: (n) => new BigNumber(n.toString(16), 16),
 };
 const toNormalizedDenomination = {
-  WEI: (bigNumber) => bigNumber.div(BIG_NUMBER_WEI_MULTIPLIER),
-  GWEI: (bigNumber) => bigNumber.div(BIG_NUMBER_GWEI_MULTIPLIER),
-  ETH: (bigNumber) => bigNumber.div(BIG_NUMBER_ETH_MULTIPLIER),
+  WEI:          (bigNumber) => bigNumber.times(BIG_NUMBER_WEI_MULTIPLIER),
+  WEI10:        (bigNumber) => bigNumber.times(BIG_NUMBER_WEI_MULTIPLIER).times(10),
+  WEI100:       (bigNumber) => bigNumber.times(BIG_NUMBER_WEI_MULTIPLIER).times(100),
+  KWEI:         (bigNumber) => bigNumber.times(BIG_NUMBER_KWEI_MULTIPLIER),
+  KWEI10:       (bigNumber) => bigNumber.times(BIG_NUMBER_KWEI_MULTIPLIER).times(10),
+  KWEI100:      (bigNumber) => bigNumber.times(BIG_NUMBER_KWEI_MULTIPLIER).times(100),
+  MWEI:         (bigNumber) => bigNumber.times(BIG_NUMBER_MWEI_MULTIPLIER),
+  MWEI10:       (bigNumber) => bigNumber.times(BIG_NUMBER_MWEI_MULTIPLIER).times(10),
+  MWEI100:      (bigNumber) => bigNumber.times(BIG_NUMBER_MWEI_MULTIPLIER).times(100),
+  GWEI:         (bigNumber) => bigNumber.times(BIG_NUMBER_GWEI_MULTIPLIER),
+  GWEI10:       (bigNumber) => bigNumber.times(BIG_NUMBER_GWEI_MULTIPLIER).times(10),
+  GWEI100:      (bigNumber) => bigNumber.times(BIG_NUMBER_GWEI_MULTIPLIER).times(100),
+  MICRO:        (bigNumber) => bigNumber.times(BIG_NUMBER_MICRO_MULTIPLIER),
+  MICRO10:      (bigNumber) => bigNumber.times(BIG_NUMBER_MICRO_MULTIPLIER).times(10),
+  MICRO100:     (bigNumber) => bigNumber.times(BIG_NUMBER_MICRO_MULTIPLIER).times(100),
+  MILLI:        (bigNumber) => bigNumber.times(BIG_NUMBER_MILLI_MULTIPLIER),
+  MILLI10:      (bigNumber) => bigNumber.times(BIG_NUMBER_MILLI_MULTIPLIER).times(10),
+  MILLI100:     (bigNumber) => bigNumber.times(BIG_NUMBER_MILLI_MULTIPLIER).times(100),
+  ETH:          (bigNumber) => bigNumber.times(BIG_NUMBER_ETH_MULTIPLIER),
+  ETH10:        (bigNumber) => bigNumber.times(BIG_NUMBER_ETH_MULTIPLIER).times(10),
+  ETH100:       (bigNumber) => bigNumber.times(BIG_NUMBER_ETH_MULTIPLIER).times(100),
+  KILO:         (bigNumber) => bigNumber.times(BIG_NUMBER_KILO_MULTIPLIER),
+  KILO10:       (bigNumber) => bigNumber.times(BIG_NUMBER_KILO_MULTIPLIER).times(10),
+  KILO100:      (bigNumber) => bigNumber.times(BIG_NUMBER_KILO_MULTIPLIER).times(100),
+  MEGA:         (bigNumber) => bigNumber.times(BIG_NUMBER_MEGA_MULTIPLIER),
+  MEGA10:       (bigNumber) => bigNumber.times(BIG_NUMBER_MEGA_MULTIPLIER).times(10),
+  MEGA100:      (bigNumber) => bigNumber.times(BIG_NUMBER_MEGA_MULTIPLIER).times(100),
+  GIGA:         (bigNumber) => bigNumber.times(BIG_NUMBER_GIGA_MULTIPLIER),
+  GIGA10:       (bigNumber) => bigNumber.times(BIG_NUMBER_GIGA_MULTIPLIER).times(10),
+  GIGA100:      (bigNumber) => bigNumber.times(BIG_NUMBER_GIGA_MULTIPLIER).times(100),
+  TERA:         (bigNumber) => bigNumber.times(BIG_NUMBER_TERA_MULTIPLIER),
+  TERA10:       (bigNumber) => bigNumber.times(BIG_NUMBER_TERA_MULTIPLIER).times(10),
+  TERA100:      (bigNumber) => bigNumber.times(BIG_NUMBER_TERA_MULTIPLIER).times(100),
 };
 const toSpecifiedDenomination = {
-  WEI: (bigNumber) => bigNumber.times(BIG_NUMBER_WEI_MULTIPLIER).round(),
-  GWEI: (bigNumber) => bigNumber.times(BIG_NUMBER_GWEI_MULTIPLIER).round(9),
-  ETH: (bigNumber) => bigNumber.times(BIG_NUMBER_ETH_MULTIPLIER).round(9),
+  WEI:          (bigNumber) => bigNumber.div(BIG_NUMBER_WEI_MULTIPLIER).round(),
+  WEI10:        (bigNumber) => bigNumber.div(BIG_NUMBER_WEI_MULTIPLIER).div(10).round(),
+  WEI100:       (bigNumber) => bigNumber.div(BIG_NUMBER_WEI_MULTIPLIER).div(100).round(),
+  KWEI:         (bigNumber) => bigNumber.div(BIG_NUMBER_KWEI_MULTIPLIER).round(),
+  KWEI10:       (bigNumber) => bigNumber.div(BIG_NUMBER_KWEI_MULTIPLIER).div(10).round(),
+  KWEI100:      (bigNumber) => bigNumber.div(BIG_NUMBER_KWEI_MULTIPLIER).div(100).round(),
+  MWEI:         (bigNumber) => bigNumber.div(BIG_NUMBER_MWEI_MULTIPLIER).round(),
+  MWEI10:       (bigNumber) => bigNumber.div(BIG_NUMBER_MWEI_MULTIPLIER).div(10).round(),
+  MWEI100:      (bigNumber) => bigNumber.div(BIG_NUMBER_MWEI_MULTIPLIER).div(100).round(),
+  GWEI:         (bigNumber) => bigNumber.div(BIG_NUMBER_GWEI_MULTIPLIER).round().round(9),
+  GWEI10:       (bigNumber) => bigNumber.div(BIG_NUMBER_GWEI_MULTIPLIER).div(10).round(9),
+  GWEI100:      (bigNumber) => bigNumber.div(BIG_NUMBER_GWEI_MULTIPLIER).div(100).round(9),
+  MICRO:        (bigNumber) => bigNumber.div(BIG_NUMBER_MICRO_MULTIPLIER).round().round(9),
+  MICRO10:      (bigNumber) => bigNumber.div(BIG_NUMBER_MICRO_MULTIPLIER).div(10).round(9),
+  MICRO100:     (bigNumber) => bigNumber.div(BIG_NUMBER_MICRO_MULTIPLIER).div(100).round(9),
+  MILLI:        (bigNumber) => bigNumber.div(BIG_NUMBER_MILLI_MULTIPLIER).round().round(9),
+  MILLI10:      (bigNumber) => bigNumber.div(BIG_NUMBER_MILLI_MULTIPLIER).div(10).round(9),
+  MILLI100:     (bigNumber) => bigNumber.div(BIG_NUMBER_MILLI_MULTIPLIER).div(100).round(9),
+  ETH:          (bigNumber) => bigNumber.div(BIG_NUMBER_ETH_MULTIPLIER).round(9),
+  ETH10:        (bigNumber) => bigNumber.div(BIG_NUMBER_ETH_MULTIPLIER).div(10).round(9),
+  ETH100:       (bigNumber) => bigNumber.div(BIG_NUMBER_ETH_MULTIPLIER).div(100).round(9),
+  KILO:         (bigNumber) => bigNumber.div(BIG_NUMBER_KILO_MULTIPLIER).round(9),
+  KILO10:       (bigNumber) => bigNumber.div(BIG_NUMBER_KILO_MULTIPLIER).div(10).round(9),
+  KILO100:      (bigNumber) => bigNumber.div(BIG_NUMBER_KILO_MULTIPLIER).div(100).round(9),
+  MEGA:         (bigNumber) => bigNumber.div(BIG_NUMBER_MEGA_MULTIPLIER).round(9),
+  MEGA10:       (bigNumber) => bigNumber.div(BIG_NUMBER_MEGA_MULTIPLIER).div(10).round(9),
+  MEGA100:      (bigNumber) => bigNumber.div(BIG_NUMBER_MEGA_MULTIPLIER).div(100).round(9),
+  GIGA:         (bigNumber) => bigNumber.div(BIG_NUMBER_GIGA_MULTIPLIER).round(9),
+  GIGA10:       (bigNumber) => bigNumber.div(BIG_NUMBER_GIGA_MULTIPLIER).div(10).round(9),
+  GIGA100:      (bigNumber) => bigNumber.div(BIG_NUMBER_GIGA_MULTIPLIER).div(100).round(9),
+  TERA:         (bigNumber) => bigNumber.div(BIG_NUMBER_TERA_MULTIPLIER).round(9),
+  TERA10:       (bigNumber) => bigNumber.div(BIG_NUMBER_TERA_MULTIPLIER).div(10).round(9),
+  TERA100:      (bigNumber) => bigNumber.div(BIG_NUMBER_TERA_MULTIPLIER).div(100).round(9),
 };
 const baseChange = {
   hex: (n) => n.toString(16),
   dec: (n) => new BigNumber(n).toString(10),
   BN: (n) => new BN(n.toString(16)),
 };
+
+const toNormalizedDecimals = {
+  0: "WEI",
+  1: "WEI10",
+  2: "WEI100",
+  3: "KWEI",
+  4: "KWEI10",
+  5: "KWEI100",
+  6: "MWEI",
+  7: "MWEI10",
+  8: "MWEI100",
+  9: "GWEI",
+  10: "GWEI10",
+  11: "GWEI100",
+  12: "MICRO",
+  13: "MICRO10",
+  14: "MICRO100",
+  15: "MILLI",
+  16: "MILLI10",
+  17: "MILLI100",
+  18: "ETH",
+  19: "ETH10",
+  20: "ETH100",
+  21: "KILO", 
+  22: "KILO10",
+  23: "KILO100",
+  24: "MEGA",
+  25: "MEGA10",
+  26: "MEGA100",
+  27: "GIGA",
+  28: "GIGA10",
+  29: "GIGA100",
+  30: "TERA",
+  31: "TERA10",
+  32: "TERA100",
+}
+
+const validUnit = (unit) => {
+  switch(string.toLower(unit)){
+    case "wei":
+      return "WEI";
+    case "kwei", "babbage", "femtoether":
+      return "KWEI";
+    case "mwei", "lovelace", "picoether":
+      return "MWEI";
+    case "gwei", "shannon", "nanoether", "nano":
+      return "GWEI";
+    case "micro", "microether", "szabo":
+      return "MICRO";
+    case "milli", "milliether", "finney":
+      return "MILLI";
+    case "ether", "eth":
+      return "ETH";
+    case "kether", "grand", "kilo", "kiloether":
+      return "KILO";
+    case "mether", "mega":
+      return "MEGA";
+    case "gether", "giga":
+      return "GIGA";
+    case "tether", "tera":
+      return "TERA";
+  }
+  throw new Error('Unknown valid base unit');
+}
 
 // Utility function for checking base types
 const isValidBase = (base) => {
@@ -117,7 +249,10 @@ const converter = ({
     if (invertConversionRate) {
       rate = new BigNumber(1.0).div(conversionRate);
     }
-    convertedValue = convertedValue.times(rate);
+    convertedValue = convertedValue.div(BIG_NUMBER_ETH_MULTIPLIER).times(rate); // Currently, it is WEI, so the conversion rate is calculated based on ETH.
+    if (toDenomination) { // If toCurrency is the local currency, toDenomination will most likely be undefined.
+      convertedValue = convertedValue.times(BIG_NUMBER_ETH_MULTIPLIER);  // Convert back to WEI if there is toDenomination value
+    }
   }
 
   if (toDenomination) {
@@ -311,4 +446,6 @@ export {
   toBigNumber,
   toNormalizedDenomination,
   divideCurrencies,
+  toNormalizedDecimals,
+  validUnit,
 };

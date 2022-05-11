@@ -390,6 +390,9 @@
   "blockies": {
     "message": "Bloklar"
   },
+  "netDecimals": {
+    "message": "Decimals"
+  },
   "browserNotSupported": {
     "message": "Tarayıcınız desteklenmiyor..."
   },

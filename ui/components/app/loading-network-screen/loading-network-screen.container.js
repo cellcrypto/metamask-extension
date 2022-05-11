@@ -7,11 +7,11 @@ import LoadingNetworkScreen from './loading-network-screen.component';
 const mapStateToProps = (state) => {
   const { loadingMessage } = state.appState;
   const { provider } = state.metamask;
-  const { rpcUrl, chainId, ticker, nickname, type } = provider;
+  const { rpcUrl, chainId, ticker, nickname, type, netDecimals } = provider;
 
   const setProviderArgs =
     type === NETWORK_TYPE_RPC
-      ? [rpcUrl, chainId, ticker, nickname]
+      ? [rpcUrl, chainId, ticker, nickname, netDecimals]
       : [provider.type];
 
   return {

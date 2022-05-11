@@ -6,6 +6,7 @@ import {
   CHAIN_ID_TO_TYPE_MAP,
   NETWORK_TO_NAME_MAP,
   CHAIN_ID_TO_RPC_URL_MAP,
+  NET_DECIMALS,
 } from '../../../../../shared/constants/network';
 import {
   isPrefixedFormattedHexString,
@@ -33,6 +34,7 @@ function findExistingNetwork(chainId, findCustomRpcBy) {
       nickname: NETWORK_TO_NAME_MAP[chainId],
       rpcUrl: CHAIN_ID_TO_RPC_URL_MAP[chainId],
       type: CHAIN_ID_TO_TYPE_MAP[chainId],
+      netDecimals: NET_DECIMALS,
     };
   }
 

@@ -3486,6 +3486,7 @@ export default class MetamaskController extends EventEmitter {
           ticker,
           chainName,
           rpcUrl,
+          netDecimals,
         } = {}) => {
           await this.preferencesController.addToFrequentRpcList(
             rpcUrl,
@@ -3495,6 +3496,7 @@ export default class MetamaskController extends EventEmitter {
             {
               blockExplorerUrl,
             },
+            netDecimals,
           );
         },
         findCustomRpcBy: this.findCustomRpcBy.bind(this),
@@ -3504,12 +3506,13 @@ export default class MetamaskController extends EventEmitter {
         setProviderType: this.networkController.setProviderType.bind(
           this.networkController,
         ),
-        updateRpcTarget: ({ rpcUrl, chainId, ticker, nickname }) => {
+        updateRpcTarget: ({ rpcUrl, chainId, ticker, nickname, netDecimals }) => {
           this.networkController.setRpcTarget(
             rpcUrl,
             chainId,
             ticker,
             nickname,
+            netDecimals,
           );
         },
 
@@ -3903,6 +3906,7 @@ export default class MetamaskController extends EventEmitter {
    * @param {string} [nickname] - Nickname of the selected network.
    * @param {Object} [rpcPrefs] - RPC preferences.
    * @param {string} [rpcPrefs.blockExplorerUrl] - URL of block explorer for the chain.
+   * @param {number} [netDecimals] - decimals
    * @returns {Promise<string>} The RPC Target URL confirmed.
    */
   async updateAndSetCustomRpc(
@@ -3911,6 +3915,7 @@ export default class MetamaskController extends EventEmitter {
     ticker = 'ETH',
     nickname,
     rpcPrefs,
+    netDecimals,
   ) {
     this.networkController.setRpcTarget(
       rpcUrl,
@@ -3918,6 +3923,7 @@ export default class MetamaskController extends EventEmitter {
       ticker,
       nickname,
       rpcPrefs,
+      netDecimals,
     );
     await this.preferencesController.updateRpc({
       rpcUrl,
@@ -3925,6 +3931,7 @@ export default class MetamaskController extends EventEmitter {
       ticker,
       nickname,
       rpcPrefs,
+      netDecimals,
     });
     return rpcUrl;
   }
@@ -3937,6 +3944,7 @@ export default class MetamaskController extends EventEmitter {
    * @param {string} ticker - The ticker symbol of the selected network.
    * @param {string} nickname - Optional nickname of the selected network.
    * @param rpcPrefs
+   * @param {number} netDecimals - decimals
    * @returns {Promise<string>} The RPC Target URL confirmed.
    */
   async setCustomRpc(
@@ -3945,6 +3953,7 @@ export default class MetamaskController extends EventEmitter {
     ticker = 'ETH',
     nickname = '',
     rpcPrefs = {},
+    netDecimals = 18,
   ) {
     const frequentRpcListDetail = this.preferencesController.getFrequentRpcListDetail();
     const rpcSettings = frequentRpcListDetail.find(
@@ -3958,6 +3967,7 @@ export default class MetamaskController extends EventEmitter {
         rpcSettings.ticker,
         rpcSettings.nickname,
         rpcPrefs,
+        rpcSettings.netDecimals,
       );
     } else {
       this.networkController.setRpcTarget(
@@ -3966,6 +3976,7 @@ export default class MetamaskController extends EventEmitter {
         ticker,
         nickname,
         rpcPrefs,
+        netDecimals,
       );
       await this.preferencesController.addToFrequentRpcList(
         rpcUrl,
@@ -3973,6 +3984,7 @@ export default class MetamaskController extends EventEmitter {
         ticker,
         nickname,
         rpcPrefs,
+        netDecimals,
       );
     }
     return rpcUrl;

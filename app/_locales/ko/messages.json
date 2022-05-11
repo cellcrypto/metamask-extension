@@ -390,6 +390,9 @@
   "blockies": {
     "message": "Blockies"
   },
+  "netDecimals": {
+    "message": "Decimals"
+  },
   "browserNotSupported": {
     "message": "지원되지 않는 브라우저입니다..."
   },
@@ -3925,7 +3928,7 @@
     "description": "Refers to a interface for connecting external devices to the browser. Used for connecting ledger to the browser. Read more here https://developer.mozilla.org/en-US/docs/Web/API/WebHID_API"
   },
   "welcome": {
-    "message": "MetaMask 방문을 환영합니다"
+    "message": "MetaMask(Dangnn) 방문을 환영합니다"
   },
   "welcomeBack": {
     "message": "재방문을 환영합니다!"

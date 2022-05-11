@@ -4,6 +4,7 @@ import {
   conversionUtil,
   addCurrencies,
   subtractCurrencies,
+  toNormalizedDecimals,
 } from '../../../shared/modules/conversion.utils';
 import { formatCurrency } from './confirm-tx.util';
 
@@ -213,4 +214,8 @@ export function sumHexWEIsToRenderableFiat(
     conversionRate,
   );
   return formatCurrency(convertedTotal, convertedCurrency);
+}
+
+export function getUnitNormalizedDecimals(decimals){
+  return toNormalizedDecimals[decimals];
 }

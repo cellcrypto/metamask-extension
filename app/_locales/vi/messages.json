@@ -390,6 +390,9 @@
   "blockies": {
     "message": "Blockies"
   },
+  "netDecimals": {
+    "message": "Decimals"
+  },
   "browserNotSupported": {
     "message": "Trình duyệt của bạn không được hỗ trợ..."
   },

@@ -29,6 +29,8 @@ export const AVALANCHE_CHAIN_ID = '0xa86a';
 export const FANTOM_CHAIN_ID = '0xfa';
 export const CELO_CHAIN_ID = '0xa4ec';
 
+export const NET_DECIMALS = 18;
+
 /**
  * The largest possible chain ID we can handle.
  * Explanation: https://gist.github.com/rekmarks/a47bd5f2525936c4b8eee31a16345553
@@ -96,29 +98,35 @@ export const NETWORK_TYPE_TO_ID_MAP = {
     networkId: ROPSTEN_NETWORK_ID,
     chainId: ROPSTEN_CHAIN_ID,
     ticker: TEST_NETWORK_TICKER_MAP[ROPSTEN],
+    netDecimals: NET_DECIMALS,
   },
   [RINKEBY]: {
     networkId: RINKEBY_NETWORK_ID,
     chainId: RINKEBY_CHAIN_ID,
     ticker: TEST_NETWORK_TICKER_MAP[RINKEBY],
+    netDecimals: NET_DECIMALS,
   },
   [KOVAN]: {
     networkId: KOVAN_NETWORK_ID,
     chainId: KOVAN_CHAIN_ID,
     ticker: TEST_NETWORK_TICKER_MAP[KOVAN],
+    netDecimals: NET_DECIMALS,
   },
   [GOERLI]: {
     networkId: GOERLI_NETWORK_ID,
     chainId: GOERLI_CHAIN_ID,
     ticker: TEST_NETWORK_TICKER_MAP[GOERLI],
+    netDecimals: NET_DECIMALS,
   },
   [MAINNET]: {
     networkId: MAINNET_NETWORK_ID,
     chainId: MAINNET_CHAIN_ID,
+    netDecimals: NET_DECIMALS,
   },
   [LOCALHOST]: {
     networkId: LOCALHOST_NETWORK_ID,
     chainId: LOCALHOST_CHAIN_ID,
+    netDecimals: NET_DECIMALS,
   },
 };
 

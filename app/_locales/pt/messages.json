@@ -390,6 +390,9 @@
   "blockies": {
     "message": "Blockies"
   },
+  "netDecimals": {
+    "message": "Decimals"
+  },
   "browserNotSupported": {
     "message": "Seu navegador não é compatível..."
   },

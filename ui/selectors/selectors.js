@@ -102,6 +102,11 @@ export function getCurrentChainId(state) {
   return chainId;
 }
 
+export function getNetDecimals(state) {
+  const { netDecimals } = state.metamask.provider;
+  return netDecimals;
+}
+
 export function getCurrentQRHardwareState(state) {
   const { qrHardware } = state.metamask;
   return qrHardware || {};

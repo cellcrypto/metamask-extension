@@ -356,6 +356,9 @@
     "message": "Exibir conta em $1",
     "description": "$1 replaced by URL for custom block explorer"
   },
+  "netDecimals": {
+    "message": "Decimals"
+  },
   "browserNotSupported": {
     "message": "Seu navegador não é compatível..."
   },

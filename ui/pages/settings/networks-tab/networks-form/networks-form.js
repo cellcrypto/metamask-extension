@@ -88,6 +88,8 @@ const NetworksForm = ({
   const [warnings, setWarnings] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [netDecimals, setNetDecimals] = useState(selectedNetwork?.netDecimals || 18);
+
   const resetForm = useCallback(() => {
     setNetworkName(selectedNetworkName || '');
     setRpcUrl(selectedNetwork.rpcUrl);
@@ -97,6 +99,7 @@ const NetworksForm = ({
     setErrors({});
     setWarnings({});
     setIsSubmitting(false);
+    setNetDecimals(selectedNetwork?.netDecimals);
   }, [selectedNetwork, selectedNetworkName]);
 
   const stateIsUnchanged = () => {
@@ -112,7 +115,8 @@ const NetworksForm = ({
       chainIdIsUnchanged &&
       ticker === selectedNetwork.ticker &&
       networkName === selectedNetworkName &&
-      blockExplorerUrl === selectedNetwork.blockExplorerUrl
+      blockExplorerUrl === selectedNetwork.blockExplorerUrl &&
+      netDecimals === selectedNetwork.netDecimals
     );
   };
 
@@ -122,6 +126,7 @@ const NetworksForm = ({
   const prevRpcUrl = useRef();
   const prevTicker = useRef();
   const prevBlockExplorerUrl = useRef();
+  const prevNetDecimals = useRef();
   useEffect(() => {
     if (!prevAddNewNetwork.current && addNewNetwork) {
       setNetworkName('');
@@ -131,12 +136,14 @@ const NetworksForm = ({
       setBlockExplorerUrl('');
       setErrors({});
       setIsSubmitting(false);
+      setNetDecimals(18);
     } else if (
       prevNetworkName.current !== selectedNetworkName ||
       prevRpcUrl.current !== selectedNetwork.rpcUrl ||
       prevChainId.current !== selectedNetwork.chainId ||
       prevTicker.current !== selectedNetwork.ticker ||
-      prevBlockExplorerUrl.current !== selectedNetwork.blockExplorerUrl
+      prevBlockExplorerUrl.current !== selectedNetwork.blockExplorerUrl ||
+      prevNetDecimals.current !== selectedNetwork.netDecimals
     ) {
       resetForm(selectedNetwork);
     }
@@ -152,6 +159,7 @@ const NetworksForm = ({
     setErrors,
     setIsSubmitting,
     resetForm,
+    setNetDecimals,
   ]);
 
   useEffect(() => {
@@ -162,6 +170,7 @@ const NetworksForm = ({
       setTicker('');
       setBlockExplorerUrl('');
       setErrors({});
+      setNetDecimals(18);
       dispatch(setSelectedSettingsRpcUrl(''));
     };
   }, [
@@ -171,6 +180,7 @@ const NetworksForm = ({
     setTicker,
     setBlockExplorerUrl,
     setErrors,
+    setNetDecimals,
     dispatch,
   ]);
 
@@ -416,6 +426,7 @@ const NetworksForm = ({
   const previousChainId = usePrevious(chainId);
   const previousTicker = usePrevious(ticker);
   const previousBlockExplorerUrl = usePrevious(blockExplorerUrl);
+  const previousNetDecimals = usePrevious(netDecimals);
   useEffect(() => {
     if (viewOnly) {
       return;
@@ -425,7 +436,8 @@ const NetworksForm = ({
       previousRpcUrl === rpcUrl &&
       previousChainId === chainId &&
       previousTicker === ticker &&
-      previousBlockExplorerUrl === blockExplorerUrl
+      previousBlockExplorerUrl === blockExplorerUrl &&
+      previousNetDecimals == netDecimals
     ) {
       return;
     }
@@ -454,12 +466,14 @@ const NetworksForm = ({
     chainId,
     ticker,
     blockExplorerUrl,
+    netDecimals,
     viewOnly,
     label,
     previousRpcUrl,
     previousChainId,
     previousTicker,
     previousBlockExplorerUrl,
+    previousNetDecimals,
     validateBlockExplorerURL,
     validateChainId,
     validateTickerSymbol,
@@ -485,6 +499,7 @@ const NetworksForm = ({
               ...rpcPrefs,
               blockExplorerUrl: blockExplorerUrl || rpcPrefs?.blockExplorerUrl,
             },
+            netDecimals,
           ),
         );
       } else {
@@ -492,7 +507,7 @@ const NetworksForm = ({
           updateAndSetCustomRpc(rpcUrl, prefixedChainId, ticker, networkName, {
             ...rpcPrefs,
             blockExplorerUrl: blockExplorerUrl || rpcPrefs?.blockExplorerUrl,
-          }),
+          }, netDecimals,),
         );
       }
 
@@ -597,6 +612,13 @@ const NetworksForm = ({
           titleText={t('blockExplorerUrl')}
           titleUnit={t('optionalWithParanthesis')}
           value={blockExplorerUrl}
+          disabled={viewOnly}
+        />
+        <FormField
+          error={errors.netDecimals?.msg || ''}
+          onChange={setNetDecimals}
+          titleText={t('netDecimals')}
+          value={netDecimals}
           disabled={viewOnly}
         />
       </div>

@@ -23,6 +23,7 @@ const defaultNetworksData = [
     chainId: MAINNET_CHAIN_ID,
     ticker: ETH_SYMBOL,
     blockExplorerUrl: 'https://etherscan.io',
+    netDecimals: 18,
   },
   {
     labelKey: ROPSTEN,
@@ -32,6 +33,7 @@ const defaultNetworksData = [
     chainId: ROPSTEN_CHAIN_ID,
     ticker: TEST_NETWORK_TICKER_MAP[ROPSTEN],
     blockExplorerUrl: 'https://ropsten.etherscan.io',
+    netDecimals: 18,
   },
   {
     labelKey: RINKEBY,
@@ -41,6 +43,7 @@ const defaultNetworksData = [
     chainId: RINKEBY_CHAIN_ID,
     ticker: TEST_NETWORK_TICKER_MAP[RINKEBY],
     blockExplorerUrl: 'https://rinkeby.etherscan.io',
+    netDecimals: 18,
   },
   {
     labelKey: GOERLI,
@@ -50,6 +53,7 @@ const defaultNetworksData = [
     chainId: GOERLI_CHAIN_ID,
     ticker: TEST_NETWORK_TICKER_MAP[GOERLI],
     blockExplorerUrl: 'https://goerli.etherscan.io',
+    netDecimals: 18,
   },
   {
     labelKey: KOVAN,
@@ -59,6 +63,7 @@ const defaultNetworksData = [
     chainId: KOVAN_CHAIN_ID,
     ticker: TEST_NETWORK_TICKER_MAP[KOVAN],
     blockExplorerUrl: 'https://kovan.etherscan.io',
+    netDecimals: 18,
   },
 ];
 

@@ -390,6 +390,9 @@
   "blockies": {
     "message": "Blockies"
   },
+  "netDecimals": {
+    "message": "Decimals"
+  },
   "browserNotSupported": {
     "message": "Peramban Anda tidak didukung..."
   },

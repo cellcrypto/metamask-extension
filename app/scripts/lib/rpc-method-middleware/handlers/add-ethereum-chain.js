@@ -56,6 +56,7 @@ async function addEthereumChainHandler(
     blockExplorerUrls = null,
     nativeCurrency = null,
     rpcUrls,
+    netDecimals = 18,
   } = req.params[0];
 
   const otherKeys = Object.keys(
@@ -66,6 +67,7 @@ async function addEthereumChainHandler(
       'iconUrls',
       'rpcUrls',
       'nativeCurrency',
+      'netDecimals',
     ]),
   );
 
@@ -152,6 +154,7 @@ async function addEthereumChainHandler(
             chainId: existingNetwork.chainId,
             nickname: existingNetwork.nickname,
             ticker: existingNetwork.ticker,
+            netDecimals: existingNetwork.netDecimals,
           },
         }),
       );
@@ -244,6 +247,7 @@ async function addEthereumChainHandler(
           chainName: _chainName,
           rpcUrl: firstValidRPCUrl,
           ticker,
+          netDecimals,
         },
       }),
     );
@@ -286,6 +290,7 @@ async function addEthereumChainHandler(
           chainId: _chainId,
           nickname: _chainName,
           ticker,
+          netDecimals,
         },
       }),
     );

@@ -4,13 +4,15 @@ import {
   formatCurrency,
   getValueFromWeiHex,
 } from '../helpers/utils/confirm-tx.util';
-import { getCurrentCurrency } from '../selectors';
+import { getCurrentCurrency, 
+  getNetDecimals, 
+} from '../selectors';
 import {
   getConversionRate,
   getNativeCurrency,
 } from '../ducks/metamask/metamask';
 
-import { conversionUtil } from '../../shared/modules/conversion.utils';
+import { conversionUtil, toNormalizedDecimals } from '../../shared/modules/conversion.utils';
 import { TEST_NETWORK_TICKER_MAP } from '../../shared/constants/network';
 
 /**
@@ -52,6 +54,7 @@ export function useCurrencyDisplay(
   const nativeCurrency = useSelector(getNativeCurrency);
   const conversionRate = useSelector(getConversionRate);
   const isUserPreferredCurrency = currency === currentCurrency;
+  const netDecimals = useSelector(getNetDecimals);
 
   const value = useMemo(() => {
     if (displayValue) {
@@ -61,6 +64,11 @@ export function useCurrencyDisplay(
       currency === nativeCurrency ||
       (!isUserPreferredCurrency && !nativeCurrency)
     ) {
+
+      if ( denomination === undefined){
+        denomination = toNormalizedDecimals[netDecimals];   // If there is no denomination value, set the base unit by decimals.
+      }
+
       return conversionUtil(inputValue, {
         fromNumericBase: 'hex',
         toNumericBase: 'dec',

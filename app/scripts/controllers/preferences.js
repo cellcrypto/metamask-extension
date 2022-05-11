@@ -370,6 +370,7 @@ export default class PreferencesController {
    * @param {string} [newRpcDetails.ticker] - Optional ticker symbol of the selected network.
    * @param {string} [newRpcDetails.nickname] - Optional nickname of the selected network.
    * @param {Object} [newRpcDetails.rpcPrefs] - Optional RPC preferences, such as the block explorer URL
+   * @param {number} [newRpcDetails.netDecimals] - Main net Decimals
    */
   async updateRpc(newRpcDetails) {
     const rpcList = this.getFrequentRpcListDetail();
@@ -432,8 +433,9 @@ export default class PreferencesController {
         ticker,
         nickname,
         rpcPrefs = {},
+        netDecimals,
       } = newRpcDetails;
-      this.addToFrequentRpcList(rpcUrl, chainId, ticker, nickname, rpcPrefs);
+      this.addToFrequentRpcList(rpcUrl, chainId, ticker, nickname, rpcPrefs, netDecimals);
     }
   }
 
@@ -445,6 +447,7 @@ export default class PreferencesController {
    * @param {string} [ticker] - Ticker symbol of the selected network.
    * @param {string} [nickname] - Nickname of the selected network.
    * @param {Object} [rpcPrefs] - Optional RPC preferences, such as the block explorer URL
+   * @param {number} [netDecimals] - Main net Decimals
    */
   addToFrequentRpcList(
     rpcUrl,
@@ -452,6 +455,7 @@ export default class PreferencesController {
     ticker = 'ETH',
     nickname = '',
     rpcPrefs = {},
+    netDecimals = 18,
   ) {
     const rpcList = this.getFrequentRpcListDetail();
 
@@ -466,7 +470,7 @@ export default class PreferencesController {
       throw new Error(`Invalid chainId: "${chainId}"`);
     }
 
-    rpcList.push({ rpcUrl, chainId, ticker, nickname, rpcPrefs });
+    rpcList.push({ rpcUrl, chainId, ticker, nickname, rpcPrefs, netDecimals });
     this.store.updateState({ frequentRpcListDetail: rpcList });
   }
 

@@ -17,6 +17,7 @@ const initialState = {
         ticker: 'ETH',
         nickname: 'Localhost 8545',
         rpcPrefs: {},
+        netDecimals: 18,
       },
     ],
   },

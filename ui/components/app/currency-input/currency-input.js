@@ -6,6 +6,7 @@ import CurrencyDisplay from '../../ui/currency-display';
 import {
   getValueFromWeiHex,
   getWeiHexFromDecimalValue,
+  getUnitNormalizedDecimals,
 } from '../../../helpers/utils/conversions.util';
 import { ETH } from '../../../helpers/constants/common';
 import { I18nContext } from '../../../contexts/i18n';
@@ -13,7 +14,7 @@ import {
   getConversionRate,
   getNativeCurrency,
 } from '../../../ducks/metamask/metamask';
-import { getCurrentCurrency, getShouldShowFiat } from '../../../selectors';
+import { getCurrentCurrency, getShouldShowFiat, getNetDecimals } from '../../../selectors';
 
 /**
  * Component that allows user to enter currency values as a number, and props receive a converted
@@ -45,6 +46,9 @@ export default function CurrencyInput({
   const [isSwapped, setSwapped] = useState(false);
   const [newHexValue, setNewHexValue] = useState(hexValue);
 
+  const netDecimals = useSelector(getNetDecimals);
+  const toDenomination = getUnitNormalizedDecimals(netDecimals);
+
   const shouldUseFiat = () => {
     if (hideSecondary) {
       return false;
@@ -65,6 +69,7 @@ export default function CurrencyInput({
           value: hexValue,
           toCurrency: ETH,
           numberOfDecimals: 8,
+          toDenomination,
         });
 
     return Number(decimalValueString) || 0;
@@ -96,8 +101,9 @@ export default function CurrencyInput({
       : getWeiHexFromDecimalValue({
           value: newDecimalValue,
           fromCurrency: ETH,
-          fromDenomination: ETH,
+          fromDenomination: toDenomination,
           conversionRate,
+          toDenomination,
         });
 
     setNewHexValue(hexValueNew);

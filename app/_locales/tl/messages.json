@@ -390,6 +390,9 @@
   "blockies": {
     "message": "Mga Blocky"
   },
+  "netDecimals": {
+    "message": "Decimals"
+  },
   "browserNotSupported": {
     "message": "Hindi sinusuportahan ang iyong Browser..."
   },

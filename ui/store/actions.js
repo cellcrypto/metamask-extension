@@ -1859,6 +1859,7 @@ export function updateAndSetCustomRpc(
   ticker = 'ETH',
   nickname,
   rpcPrefs,
+  netDecimals,
 ) {
   return async (dispatch) => {
     log.debug(
@@ -1872,6 +1873,7 @@ export function updateAndSetCustomRpc(
         ticker,
         nickname || newRpc,
         rpcPrefs,
+        netDecimals,
       );
     } catch (error) {
       log.error(error);
@@ -1893,6 +1895,7 @@ export function editRpc(
   ticker = 'ETH',
   nickname,
   rpcPrefs,
+  netDecimals,
 ) {
   return async (dispatch) => {
     log.debug(`background.delRpcTarget: ${oldRpc}`);
@@ -1911,6 +1914,7 @@ export function editRpc(
         ticker,
         nickname || newRpc,
         rpcPrefs,
+        netDecimals,
       );
     } catch (error) {
       log.error(error);
@@ -1925,10 +1929,10 @@ export function editRpc(
   };
 }
 
-export function setRpcTarget(newRpc, chainId, ticker = 'ETH', nickname) {
+export function setRpcTarget(newRpc, chainId, ticker = 'ETH', nickname, netDecimals) {
   return async (dispatch) => {
     log.debug(
-      `background.setRpcTarget: ${newRpc} ${chainId} ${ticker} ${nickname}`,
+      `background.setRpcTarget: ${newRpc} ${chainId} ${ticker} ${nickname} ${netDecimals}`,
     );
 
     try {
@@ -1937,6 +1941,7 @@ export function setRpcTarget(newRpc, chainId, ticker = 'ETH', nickname) {
         chainId,
         ticker,
         nickname || newRpc,
+        netDecimals,
       );
     } catch (error) {
       log.error(error);

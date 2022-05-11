@@ -53,6 +53,7 @@ if (process.env.IN_TEST) {
 
 const defaultProviderConfig = {
   ticker: 'ETH',
+  netDecimals: 18,
   ...defaultProviderConfigOpts,
 };
 
@@ -272,7 +273,7 @@ export default class NetworkController extends EventEmitter {
     return NETWORK_TYPE_TO_ID_MAP[type]?.chainId || configChainId;
   }
 
-  setRpcTarget(rpcUrl, chainId, ticker = 'ETH', nickname = '', rpcPrefs) {
+  setRpcTarget(rpcUrl, chainId, ticker = 'ETH', nickname = '', rpcPrefs, netDecimals = 18) {
     assert.ok(
       isPrefixedFormattedHexString(chainId),
       `Invalid chain ID "${chainId}": invalid hex string.`,
@@ -288,6 +289,7 @@ export default class NetworkController extends EventEmitter {
       ticker,
       nickname,
       rpcPrefs,
+      netDecimals,
     });
   }
 
@@ -308,6 +310,7 @@ export default class NetworkController extends EventEmitter {
       chainId,
       ticker: ticker ?? 'ETH',
       nickname: '',
+      netDecimals: 18,
     });
   }
 

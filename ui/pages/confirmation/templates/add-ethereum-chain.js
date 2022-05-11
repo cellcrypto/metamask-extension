@@ -82,7 +82,7 @@ async function getAlerts(pendingApproval) {
 
   if (matchedChain) {
     if (
-      matchedChain.nativeCurrency?.decimals !== 18 ||
+      // matchedChain.nativeCurrency?.decimals !== 18 ||  // Removed for unit processing as decimals. Logic necessary to check and show later with chains
       matchedChain.name.toLowerCase() !==
         pendingApproval.requestData.chainName.toLowerCase() ||
       matchedChain.nativeCurrency?.symbol !== pendingApproval.requestData.ticker

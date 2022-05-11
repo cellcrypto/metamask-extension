@@ -55,6 +55,7 @@ const NetworksTab = ({ addNewNetwork }) => {
       ticker: rpc.ticker,
       blockExplorerUrl: rpc.rpcPrefs?.blockExplorerUrl || '',
       isATestNetwork: TEST_CHAINS.includes(rpc.chainId),
+      netDecimals: rpc.netDecimals,
     };
   });
 
