@@ -143,7 +143,7 @@ const toNormalizedDecimals = {
   18: "ETH",
   19: "ETH10",
   20: "ETH100",
-  21: "KILO", 
+  21: "KILO",
   22: "KILO10",
   23: "KILO100",
   24: "MEGA",
@@ -249,10 +249,7 @@ const converter = ({
     if (invertConversionRate) {
       rate = new BigNumber(1.0).div(conversionRate);
     }
-    convertedValue = convertedValue.div(BIG_NUMBER_ETH_MULTIPLIER).times(rate); // Currently, it is WEI, so the conversion rate is calculated based on ETH.
-    if (toDenomination) { // If toCurrency is the local currency, toDenomination will most likely be undefined.
-      convertedValue = convertedValue.times(BIG_NUMBER_ETH_MULTIPLIER);  // Convert back to WEI if there is toDenomination value
-    }
+    convertedValue = convertedValue.times(rate);
   }
 
   if (toDenomination) {

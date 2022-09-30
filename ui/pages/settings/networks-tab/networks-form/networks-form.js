@@ -158,8 +158,8 @@ const NetworksForm = ({
     setBlockExplorerUrl,
     setErrors,
     setIsSubmitting,
-    resetForm,
     setNetDecimals,
+    resetForm,
   ]);
 
   useEffect(() => {
